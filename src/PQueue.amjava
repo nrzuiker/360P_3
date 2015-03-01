@@ -18,13 +18,53 @@ public monitor class PQueue {
 	// This method blocks when the list is full.
 	public int insert(String name, int priority) {
 		waituntil(size < max);
-		
+		PriorityNode newNode = new PriorityNode(name, priority);
+		if(size == 0) { //Add first node if PQueue is empty
+			head = newNode;
+			size++;
+			return 0;
+		}
+		//We are adding to an already existing PQueue
+		PriorityNode nextNode = head;
+		PriorityNode prevNode = head;
+		int index = 0;
+		//Find the nodes between which to insert newNode
+		while(nextNode != null && nextNode.priority >= priority) {
+			//Check if the name already exists in PQueue
+			if(nextNode.name.equals(name)) {
+				return -1;
+			}
+			prevNode = nextNode;
+			nextNode = nextNode.next;
+			index++;
+		}
+		//If index = 0, we need to update head
+		if(index == 0) {
+			head = newNode;
+		} else {
+			prevNode.next = newNode;
+		}
+		newNode.next = nextNode;
+		size++;		
+		return index;
 	}
 	
 	// Returns the position of the name in the list. 
 	// If the name is not found it returns -1;
 	public int search(String name) {
-		
+		PriorityNode nextNode = head;
+		int index = 0;
+		while(nextNode != null) {
+			//Check if we found the name
+			if(nextNode.name.equals(name)) {
+				return index;
+			}
+			//Move on to next node
+			nextNode = nextNode.next;
+			index++;
+		}
+		//Only get here if we reached the end of the PQueue
+		return -1;
 	}
 	
 	// Returns the name with the highest priority in the list. 
