@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class LibraryServer {
+public class Server {
 	public class UDPListener implements Runnable{
 		int port;
-		LibraryServer myServer;
+		Server myServer;
 		int len = 1024;
 		public UDPListener(){
 		}
@@ -21,7 +21,7 @@ public class LibraryServer {
 					DatagramPacket datapacket = new DatagramPacket(buf, buf.length);
 					udpSocket.receive(datapacket);
 					String req = new String (datapacket.getData());
-					String resp = LibraryServer.this.processRequest(req);
+					String resp = Server.this.processRequest(req);
 					byte[] respBytes = resp.getBytes();
 					DatagramPacket returnpacket = new DatagramPacket (
 							respBytes,
@@ -47,7 +47,7 @@ public class LibraryServer {
 	private final String FAIL = "fail";
 	private final String AVAILABLE = "available";
 	private final String FREE = "free";
-	public LibraryServer(){
+	public Server(){
 		bookMap = new HashMap<String, String>();
 		tcpPort = INVALID;
 	}
