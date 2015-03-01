@@ -1,5 +1,52 @@
 
 public monitor class PQueue {
-
-
+	private int size, max;
+	private PriorityNode head, tail;
+	
+	// Creates a Priority queue with maximum allowed size as m
+	public PQueue(int m) {
+		max = m;
+		size = 0;
+		head = null;
+		tail = null;
+	}
+	
+		
+	// Inserts the name with its priority in the PQueue. 
+	// It returns -1 if the name is already present in the list. 
+	// Otherwise, returns the current position in the list where the name was inserted. 
+	// This method blocks when the list is full.
+	public int insert(String name, int priority) {
+		waituntil(size < max);
+		
+	}
+	
+	// Returns the position of the name in the list. 
+	// If the name is not found it returns -1;
+	public int search(String name) {
+		
+	}
+	
+	// Returns the name with the highest priority in the list. 
+	// If the list is empty, then the method blocks. 
+	// The name is deleted from the list.
+	public String getFirst() {
+		waituntil(head != null);
+		String name = head.name;
+		head = head.next;
+		size--;
+		return name;
+	}
+	
+	public class PriorityNode {
+		public String name;
+		public int priority;
+		public PriorityNode next;
+		
+		public PriorityNode(String n, int p) {
+			name = n;
+			priority = p;
+			next = null;
+		}
+	}
 }
