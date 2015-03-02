@@ -1,14 +1,13 @@
 
 public monitor class PQueue {
 	private int size, max;
-	private PriorityNode head, tail;
+	private PriorityNode head;
 	
 	// Creates a Priority queue with maximum allowed size as m
 	public PQueue(int m) {
 		max = m;
 		size = 0;
 		head = null;
-		tail = null;
 	}
 	
 		
@@ -76,6 +75,15 @@ public monitor class PQueue {
 		head = head.next;
 		size--;
 		return name;
+	}
+	
+	public void printQueue() {
+		PriorityNode nextNode = head;
+		while(nextNode != null) {
+			System.out.println("Priority:" + nextNode.priority + "  Name:" + nextNode.name);
+			nextNode = nextNode.next;
+		}
+		System.out.println();
 	}
 	
 	public class PriorityNode {
